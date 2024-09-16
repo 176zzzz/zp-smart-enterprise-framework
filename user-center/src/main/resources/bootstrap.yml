@@ -1,0 +1,30 @@
+server:
+  port: 9300
+spring:
+  application:
+    name: user-center
+  cloud:
+    nacos:
+      serverAddr: zp.com.cn:8848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: sef
+      config:
+        file-extension: yaml
+        shared-configs:
+          - data-id: common.yaml
+            group: DEFAULT_GROUP
+
+
+
+
+
+
+
+
+
+
+
+
+

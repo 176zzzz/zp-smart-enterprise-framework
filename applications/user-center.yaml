@@ -1,0 +1,28 @@
+server:
+  port: 9300
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://ip:3306/user_center?useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&useSSL=true&autoReconnect=true
+    username: root
+    password: xxx
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      # 连接池-初始化大小
+      initial-size: 50
+      # 连接池-最大连接数
+      max-active: 200
+      # 最大等待时间
+      max-wait: 60000
+      # 连接池-最小空闲数
+      min-idle: 10
+      # 检测空闲连接
+      test-while-idle: true
+      # 最小空闲时间
+      min-evictable-idle-time-millis: 300000
+
+
+
+
+
+

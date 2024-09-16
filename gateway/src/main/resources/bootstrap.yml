@@ -1,0 +1,29 @@
+server:
+  port: 9200
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      serverAddr: zp.com.cn:8848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: sef
+      config:
+        file-extension: yaml
+        shared-configs:
+          - data-id: common.yaml
+            group: DEFAULT_GROUP
+
+
+
+
+
+
+
+
+
+
+
+
