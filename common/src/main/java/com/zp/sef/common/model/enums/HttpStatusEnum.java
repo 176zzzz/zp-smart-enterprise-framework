@@ -1,4 +1,4 @@
-package com.zp.sef.user.model.enums;
+package com.zp.sef.common.model.enums;
 
 import lombok.Getter;
 

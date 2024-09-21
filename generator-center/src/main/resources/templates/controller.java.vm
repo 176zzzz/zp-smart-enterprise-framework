@@ -1,0 +1,118 @@
+package ${package.Controller};
+
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ZP
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+@RequiredArgsConstructor
+@Api(tags = "$!{table.comment}")
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+
+    private  final ${table.serviceName} ${table.entityPath}Service;
+
+    @PostMapping("/save")
+    @ApiOperation(value = "新增$!{table.comment}", notes = "新增$!{table.comment}")
+    public Result<Boolean> save${entity}(@RequestBody ${entity} ${table.entityPath}) {
+        return Result.succeed(${table.entityPath}Service.save(${table.entityPath}),MsgConstant.SUCCESS);
+    }
+
+    @GetMapping("/delete")
+    @ApiOperation(value = "根据id删除$!{table.comment}", notes = "根据id删除$!{table.comment}")
+    public Result<Boolean> delete${entity}ById(@RequestParam("id") @NotNull(message = MsgConstant.CANT_BE_NULL) Long id) {
+        return Result.succeed(${table.entityPath}Service.removeById(id),MsgConstant.SUCCESS);
+    }
+
+    @PostMapping("/update")
+    @ApiOperation(value = "更新$!{table.comment}", notes = "更新$!{table.comment}")
+    public Result<Boolean> update${entity}(@RequestBody ${entity} ${table.entityPath}) {
+        return Result.succeed(${table.entityPath}Service.updateById(${table.entityPath}),MsgConstant.SUCCESS);
+    }
+
+    @PostMapping("/findAll")
+    @ApiOperation(value = "查询所有$!{table.comment}", notes = "查询所有$!{table.comment}")
+    public Result<List<${entity}>> findAll${entity}() {
+        return Result.succeed(${table.entityPath}Service.list(),MsgConstant.SUCCESS);
+    }
+
+    @GetMapping("/findOneById")
+    @ApiOperation(value = "根据id查询$!{table.comment}", notes = "根据id查询$!{table.comment}")
+    public Result<${entity}> findOne${entity}ById(@RequestParam("id") @NotNull(message = MsgConstant.CANT_BE_NULL) Long id) {
+        return Result.succeed(${table.entityPath}Service.getById(id),MsgConstant.SUCCESS);
+    }
+
+    @GetMapping("list")
+    @ApiOperation(value = "分页查询$!{table.comment}", notes = "分页查询$!{table.comment}")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "pageNum", value = "当前页数", required = true),
+        @ApiImplicitParam(name = "pageSize", value = "每页记录数", required = true)
+    })
+    public PageResult<${entity}> find${entity}ByPage(
+        @RequestParam("pageNum") @NotNull(message = MsgConstant.CANT_BE_NULL) Integer pageNum,
+        @RequestParam("pageSize") @NotNull(message = MsgConstant.CANT_BE_NULL) Integer pageSize) {
+        PageMethod.startPage(pageNum, pageSize);
+        List<${entity}> ${table.entityPath}List = ${table.entityPath}Service.list();
+        PageInfo<${entity}> pageInfo = new PageInfo<>(${table.entityPath}List);
+        return PageResult.<${entity}>builder().data(pageInfo.getList()).code(0).count(pageInfo.getTotal()).build();
+    }
+
+    @PostMapping("/excel/exportByRoadIds")
+    @ApiOperation(value = "根据id集合导出$!{table.comment}", notes = "根据id集合导出$!{table.comment}")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "idsDto", value = "导出id集合",paramType = "body",dataType = "IdsDto"),
+    })
+    public void exportByRoadIds(@RequestBody IdsDto idsDto, HttpServletResponse response) throws ControllerException {
+        try {
+
+            List<${entity}> ${table.entityPath}List;
+            if (CollectionUtils.isNotEmpty(idsDto.getIds())) {
+                ${table.entityPath}List = ${table.entityPath}Service.list(new QueryWrapper<${entity}>().in("id", idsDto.getIds()));
+            }
+            else{
+                 ${table.entityPath}List = ${table.entityPath}Service.list();
+            }
+            response.setContentType("application/vnd.ms-excel");
+            response.setHeader("Content-disposition",
+            "attachment;filename=" + "$!{table.comment}" + ".xls");
+            Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("用户导出","$!{table.comment}"),
+            ${entity}.class, ${table.entityPath}List);
+            @Cleanup OutputStream outputStream = response.getOutputStream();
+            workbook.write(outputStream);
+        } catch (Exception e) {
+            throw new ControllerException(e.getMessage());
+        }
+    }
+
+}
+
+#end

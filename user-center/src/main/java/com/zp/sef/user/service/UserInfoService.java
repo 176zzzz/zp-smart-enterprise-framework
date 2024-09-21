@@ -1,6 +1,6 @@
 package com.zp.sef.user.service;
 
-import com.zp.sef.user.model.entity.UserInfo;
+import com.zp.sef.user.entity.UserInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

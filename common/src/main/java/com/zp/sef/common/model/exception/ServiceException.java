@@ -1,4 +1,4 @@
-package com.zp.sef.user.common.exception;
+package com.zp.sef.common.model.exception;
 
 /**
  * ServiceException

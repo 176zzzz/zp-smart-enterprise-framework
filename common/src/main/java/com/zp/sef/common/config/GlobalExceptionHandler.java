@@ -1,8 +1,8 @@
-package com.zp.sef.user.config;
+package com.zp.sef.common.config;
 
 
-import com.zp.sef.user.common.exception.ServiceException;
-import com.zp.sef.user.model.common.ResponseResult;
+import com.zp.sef.common.model.web.ResponseResult;
+import com.zp.sef.common.model.exception.ServiceException;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;

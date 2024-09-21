@@ -1,7 +1,7 @@
-package com.zp.sef.user.model.common;
+package com.zp.sef.common.model.web;
 
 
-import com.zp.sef.user.model.enums.HttpStatusEnum;
+import com.zp.sef.common.model.enums.HttpStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

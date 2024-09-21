@@ -18,6 +18,8 @@
     <modules>
         <module>gateway</module>
         <module>user-center</module>
+        <module>generator-center</module>
+        <module>common</module>
     </modules>
 
     <dependencies>
@@ -120,9 +122,10 @@
         <spring-cloud.version>2021.0.5</spring-cloud.version>
         <spring-cloud-bootstrap.version>3.1.1</spring-cloud-bootstrap.version>
         <!--数据库配置-->
-        <druid.version>1.1.10</druid.version>
+        <druid.version>1.1.21</druid.version>
         <mysql.version>8.0.22</mysql.version>
-        <mp.version>3.5.6</mp.version>
+        <mp.version>3.5.7</mp.version>
+        <velocity.version>2.3</velocity.version>
         <springdoc-version>1.6.7</springdoc-version>
         <nacos.version>2021.0.1.0</nacos.version>
     </properties>

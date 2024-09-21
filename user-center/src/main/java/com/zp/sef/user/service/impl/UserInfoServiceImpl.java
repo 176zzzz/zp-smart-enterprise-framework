@@ -1,6 +1,6 @@
 package com.zp.sef.user.service.impl;
 
-import com.zp.sef.user.model.entity.UserInfo;
+import com.zp.sef.user.entity.UserInfo;
 import com.zp.sef.user.mapper.UserInfoMapper;
 import com.zp.sef.user.service.UserInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
