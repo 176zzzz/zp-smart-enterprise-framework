@@ -13,18 +13,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * BaseController
+ *
  * @author ZP
  */
 
-public class BaseController<M extends IService<T>,T>{
+public class BaseController<M extends IService<T>, T> {
 
     @Autowired
-    private M service;
+    protected M service;
 
     @PostMapping("/save")
     @Operation(summary = "save", description = "save")
-    public ResponseResult<Integer> saveUserInfo(@RequestBody T userInfo) {
-        service.save(userInfo);
+    public ResponseResult<Integer> saveUserInfo(@RequestBody T entity) {
+        service.save(entity);
         return ResponseResult.success();
     }
 
@@ -70,6 +71,8 @@ public class BaseController<M extends IService<T>,T>{
     @PostMapping("/findAll")
     @Operation(summary = "findAll", description = "findAll")
     public ResponseResult<List<T>> findAllUserInfo() {
+        long currentThreadId = Thread.currentThread().getId();
+        System.out.println("当前线程ID: " + currentThreadId);
         return ResponseResult.success(service.list());
     }
 
@@ -78,15 +81,6 @@ public class BaseController<M extends IService<T>,T>{
     public ResponseResult<T> findById(@PathVariable("id") Long id) {
         return ResponseResult.success(service.getById(id));
     }
-
-
-
-
-
-
-
-
-
 
 
 }

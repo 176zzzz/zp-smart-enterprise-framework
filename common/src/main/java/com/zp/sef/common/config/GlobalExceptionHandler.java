@@ -1,9 +1,10 @@
 package com.zp.sef.common.config;
 
 
-import com.zp.sef.common.model.web.ResponseResult;
 import com.zp.sef.common.model.exception.ServiceException;
+import com.zp.sef.common.model.web.ResponseResult;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,12 +14,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * GlobalExceptionHandler
  *
  * @author ZP
- * 
  */
 @Slf4j
 @ResponseBody
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    /**
+     * 参数校验异常
+     */
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseResult handleConstraintViolationException(ConstraintViolationException e, HttpServletRequest request) {
+        String requestUrl = request.getRequestURI();
+        String serviceExceptionMsg = "传参错误，请求地址：{}，报错为：{}";
+        log.error(serviceExceptionMsg, requestUrl, e.getMessage());
+        return ResponseResult.fail(e.getMessage());
+    }
+
 
     /**
      * 业务异常
@@ -27,7 +39,7 @@ public class GlobalExceptionHandler {
     public ResponseResult handleServiceException(ServiceException e, HttpServletRequest request) {
         String requestUrl = request.getRequestURI();
         String serviceExceptionMsg = "请求发生业务异常，请求地址：{}，报错为：{}";
-        log.error(serviceExceptionMsg,requestUrl,e.getMessage());
+        log.error(serviceExceptionMsg, requestUrl, e.getMessage());
         return ResponseResult.fail(e.getMessage());
     }
 

@@ -5,9 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * UserCenterApplication
+ *
  * @author ZP
  */
-@SpringBootApplication(scanBasePackages={"com.zp.sef.*"})
+@SpringBootApplication(scanBasePackages = {"com.zp.sef.**", "com.zp.sef.common.**"})
 public class UserCenterApplication {
 
     public static void main(String[] args) {
