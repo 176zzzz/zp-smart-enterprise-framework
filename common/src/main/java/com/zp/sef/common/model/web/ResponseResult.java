@@ -39,11 +39,11 @@ public class ResponseResult<T> {
     /**
      * 全参数方法
      *
-     * @param code    状态码
-     * @param status  状态
+     * @param code 状态码
+     * @param status 状态
      * @param message 返回信息
-     * @param data    返回数据
-     * @param <T>     泛型
+     * @param data 返回数据
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     private static <T> ResponseResult<T> response(Integer code, Boolean status, String message, T data) {
@@ -58,10 +58,10 @@ public class ResponseResult<T> {
     /**
      * 全参数方法
      *
-     * @param code    状态码
-     * @param status  状态
+     * @param code 状态码
+     * @param status 状态
      * @param message 返回信息
-     * @param <T>     泛型
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     private static <T> ResponseResult<T> response(Integer code, Boolean status, String message) {
@@ -86,7 +86,7 @@ public class ResponseResult<T> {
      * 成功返回（枚举参数）
      *
      * @param httpResponseEnum 枚举参数
-     * @param <T>              泛型
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     public static <T> ResponseResult<T> success(HttpStatusEnum httpResponseEnum) {
@@ -96,9 +96,9 @@ public class ResponseResult<T> {
     /**
      * 成功返回（状态码+返回信息）
      *
-     * @param code    状态码
+     * @param code 状态码
      * @param message 返回信息
-     * @param <T>     泛型
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     public static <T> ResponseResult<T> success(Integer code, String message) {
@@ -109,8 +109,8 @@ public class ResponseResult<T> {
      * 成功返回（返回信息 + 数据）
      *
      * @param message 返回信息
-     * @param data    数据
-     * @param <T>     泛型
+     * @param data 数据
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     public static <T> ResponseResult<T> success(String message, T data) {
@@ -120,10 +120,10 @@ public class ResponseResult<T> {
     /**
      * 成功返回（状态码+返回信息+数据）
      *
-     * @param code    状态码
+     * @param code 状态码
      * @param message 返回信息
-     * @param data    数据
-     * @param <T>     泛型
+     * @param data 数据
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     public static <T> ResponseResult<T> success(Integer code, String message, T data) {
@@ -134,22 +134,11 @@ public class ResponseResult<T> {
      * 成功返回（数据）
      *
      * @param data 数据
-     * @param <T>  泛型
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     public static <T> ResponseResult<T> success(T data) {
         return response(HttpStatusEnum.SUCCESS.getCode(), true, HttpStatusEnum.SUCCESS.getMessage(), data);
-    }
-
-    /**
-     * 成功返回（返回信息）
-     *
-     * @param message 返回信息
-     * @param <T>  泛型
-     * @return {@link ResponseResult<T>}
-     */
-    public static <T> ResponseResult<T> success(String message) {
-        return response(HttpStatusEnum.SUCCESS.getCode(), true, message, null);
     }
 
     /**
@@ -166,7 +155,7 @@ public class ResponseResult<T> {
      * 失败返回（枚举）
      *
      * @param httpResponseEnum 枚举
-     * @param <T>              泛型
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     public static <T> ResponseResult<T> fail(HttpStatusEnum httpResponseEnum) {
@@ -176,9 +165,9 @@ public class ResponseResult<T> {
     /**
      * 失败返回（状态码+返回信息）
      *
-     * @param code    状态码
+     * @param code 状态码
      * @param message 返回信息
-     * @param <T>     泛型
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     public static <T> ResponseResult<T> fail(Integer code, String message) {
@@ -189,8 +178,8 @@ public class ResponseResult<T> {
      * 失败返回（返回信息+数据）
      *
      * @param message 返回信息
-     * @param data    数据
-     * @param <T>     泛型
+     * @param data 数据
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     public static <T> ResponseResult<T> fail(String message, T data) {
@@ -200,10 +189,10 @@ public class ResponseResult<T> {
     /**
      * 失败返回（状态码+返回信息+数据）
      *
-     * @param code    状态码
+     * @param code 状态码
      * @param message 返回消息
-     * @param data    数据
-     * @param <T>     泛型
+     * @param data 数据
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     public static <T> ResponseResult<T> fail(Integer code, String message, T data) {
@@ -214,7 +203,7 @@ public class ResponseResult<T> {
      * 失败返回（数据）
      *
      * @param data 数据
-     * @param <T>  泛型
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     public static <T> ResponseResult<T> fail(T data) {
@@ -225,10 +214,11 @@ public class ResponseResult<T> {
      * 失败返回（返回信息）
      *
      * @param message 返回信息
-     * @param <T>  泛型
+     * @param <T> 泛型
      * @return {@link ResponseResult<T>}
      */
     public static <T> ResponseResult<T> fail(String message) {
         return response(HttpStatusEnum.ERROR.getCode(), false, message, null);
     }
+
 }

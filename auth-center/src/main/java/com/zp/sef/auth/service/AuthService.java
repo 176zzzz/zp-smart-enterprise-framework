@@ -5,7 +5,8 @@
 package com.zp.sef.auth.service;
 
 import com.zp.sef.auth.vo.LoginVo;
-import com.zp.sef.common.model.web.ResponseResult;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import javax.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 
@@ -22,6 +23,6 @@ public interface AuthService {
      * @param loginVo LoginVo
      * @return ResponseResult<String>
      */
-    ResponseResult<String> login(@Valid LoginVo loginVo);
+    String login(@Valid LoginVo loginVo) throws InvalidKeySpecException, NoSuchAlgorithmException;
 
 }

@@ -34,4 +34,11 @@ public class UserInfo extends BaseEntity {
     @TableField("status")
     private Integer status;
 
+    public boolean isEnabled() {
+        if (status == null) {
+            return false;
+        }
+        return status.compareTo(1) == 0;
+    }
+
 }

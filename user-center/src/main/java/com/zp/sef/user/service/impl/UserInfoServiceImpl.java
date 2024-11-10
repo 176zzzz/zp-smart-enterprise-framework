@@ -42,10 +42,13 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         UserInfo userInfo = findByUsername(userName);
         if (userInfo != null) {
             loginUser = new LoginUser();
+            loginUser.setId(userInfo.getId());
             loginUser.setUserName(userName);
             loginUser.setPassword(userInfo.getPassword());
+            loginUser.setEnabled(userInfo.isEnabled());
         }
         //TODO 增加权限
+
         return loginUser;
     }
 

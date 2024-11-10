@@ -19,7 +19,7 @@ public abstract class BaseEntity {
 
     @Schema(description = "id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private Integer id;
+    private String id;
 
     @Schema(description = "是否已删除")
     @TableField("deleted")

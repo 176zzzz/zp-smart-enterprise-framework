@@ -3,6 +3,7 @@ package com.zp.sef.common.config;
 
 import com.zp.sef.common.model.exception.ServiceException;
 import com.zp.sef.common.model.web.ResponseResult;
+import feign.FeignException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +51,17 @@ public class GlobalExceptionHandler {
     public ResponseResult handleRuntimeException(RuntimeException e, HttpServletRequest request) {
         String requestUrl = request.getRequestURI();
         log.error("请求地址'{}',发生未知异常.", requestUrl, e);
+        return ResponseResult.fail(e.getMessage());
+    }
+
+    /**
+     * feign调用出错
+     */
+    @ExceptionHandler(FeignException.class)
+    public ResponseResult handleRuntimeException(FeignException e, HttpServletRequest request) {
+        String requestUrl = request.getRequestURI();
+        String serviceExceptionMsg = "feign调用发生异常，请求地址：{}，报错为：{}";
+        log.error(serviceExceptionMsg, requestUrl, e.getMessage());
         return ResponseResult.fail(e.getMessage());
     }
 
